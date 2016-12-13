@@ -1,1 +1,1 @@
-include ':app', ':bargraphlib'
+include ':demo', ':bargraphlib'
