@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="BarGraph">
+    <attr name="horizontalGridSpacing" format="dimension"/>
+    <attr name="verticalGridSpacing" format="dimension"/>
+    <attr name="gridLineWidth" format="dimension"/>
+    <attr name="offsetAxisX" format="dimension" />
+    <attr name="gridLineColor" format="color" />
+    <attr name="axisLineColor" format="color" />
+  </declare-styleable>
+</resources>
