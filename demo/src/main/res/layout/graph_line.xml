@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginRight="20dp"
+    android:id="@+id/container">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/friendPhoto"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/graph_friend_photo"
+        android:layout_height="@dimen/graph_friend_photo"
+        android:layout_gravity="center"
+        android:src="@drawable/womam_1"
+        app:civ_border_width="@dimen/photo_border_width"
+        app:civ_border_color="@color/colorAccent"
+        android:layout_alignParentBottom="true"/>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="3dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/line_gradient"
+        android:layout_above="@id/friendPhoto"
+        />
+
+    <View
+        android:id="@+id/ring"
+        android:layout_width="@dimen/ringDiameter"
+        android:layout_height="@dimen/ringDiameter"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/line"
+        android:background="@drawable/ring_shape" />
+
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_above="@id/ring"
+        android:paddingBottom="3dp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

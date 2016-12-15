@@ -13,20 +13,15 @@
     >
 
   <br.com.renanbandeira.bargraphlib.view.BarGraph
-      xmlns:graph="http://schemas.android.com/apk/res/br.com.renanbandeira.bargraphlib"
+      xmlns:graph="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/graph"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      graph:axisLineColor="#f00"
-      graph:gridLineColor="#c00"
+      graph:axisLineColor="@color/colorPrimary"
+      graph:gridLineColor="@color/colorPrimaryDark"
       graph:gridLineWidth="1dp"
-      graph:horizontalGridSpacing="2dp"
-      graph:offsetAxisX="10dp"
-      graph:verticalGridSpacing="0dp"
-      />
-
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hello World!"
+      graph:horizontalGridSpacing="20dp"
+      graph:offsetAxisX="57dp"
+      graph:verticalGridSpacing="20dp"
       />
 </RelativeLayout>

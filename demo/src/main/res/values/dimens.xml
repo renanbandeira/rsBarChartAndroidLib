@@ -1,5 +1,11 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="activity_vertical_margin">16dp</dimen>
+  <dimen name="grid_line_width">1dp</dimen>
+  <dimen name="photo_border_width">1dp</dimen>
+  <dimen name="graph_friend_photo">40dp</dimen>
+  <dimen name="grid_line_space">15dp</dimen>
+  <dimen name="paddingStart">16dp</dimen>
+  <dimen name="ringDiameter">10dp</dimen>
 </resources>

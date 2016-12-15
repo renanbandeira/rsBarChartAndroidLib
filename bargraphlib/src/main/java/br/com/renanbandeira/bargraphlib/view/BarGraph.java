@@ -9,17 +9,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import br.com.renanbandeira.bargraphlib.R;
+import br.com.renanbandeira.bargraphlib.adapter.BaseGraphBarAdapter;
 
 /***
  * This View is responsible to create a Bar Chart.
  * The idea is to work as a Horizontal RecyclerView
  */
 public class BarGraph extends RecyclerView {
-  float horizontalGridSpacing;
-  float verticalGridSpacing;
-  float offsetAxisX;
-  float gridLineWidth;
+  int horizontalGridSpacing;
+  int verticalGridSpacing;
+  int offsetAxisX;
+  int gridLineWidth;
   int gridLineColor;
   int axisLineColor;
   LinearLayoutManager mGraphLayoutManager;
@@ -57,10 +59,10 @@ public class BarGraph extends RecyclerView {
     initLayoutManager(context);
     TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BarGraph, 0, 0);
     try {
-      horizontalGridSpacing = ta.getDimension(R.styleable.BarGraph_horizontalGridSpacing, 0.0f);
-      verticalGridSpacing = ta.getDimension(R.styleable.BarGraph_verticalGridSpacing, 0.0f);
-      offsetAxisX = ta.getDimension(R.styleable.BarGraph_offsetAxisX, 0.0f);
-      gridLineWidth = ta.getDimension(R.styleable.BarGraph_offsetAxisX, 0.0f);
+      horizontalGridSpacing = ta.getDimensionPixelSize(R.styleable.BarGraph_horizontalGridSpacing, 0);
+      verticalGridSpacing = ta.getDimensionPixelSize(R.styleable.BarGraph_verticalGridSpacing, 0);
+      offsetAxisX = ta.getDimensionPixelSize(R.styleable.BarGraph_offsetAxisX, 0);
+      gridLineWidth = ta.getDimensionPixelSize(R.styleable.BarGraph_gridLineWidth, 0);
       gridLineColor = ta.getColor(R.styleable.BarGraph_gridLineColor, Color.TRANSPARENT);
       axisLineColor = ta.getColor(R.styleable.BarGraph_axisLineColor, gridLineColor);
     } finally {
@@ -69,7 +71,7 @@ public class BarGraph extends RecyclerView {
   }
 
   @Override protected void dispatchDraw(Canvas canvas) {
-    float bottom = getBottom() - offsetAxisX;
+    int bottom = getBottom() - offsetAxisX;
     int top = getTop();
     int left = getLeft();
     int right = getRight();
@@ -82,54 +84,73 @@ public class BarGraph extends RecyclerView {
     canvas.drawLine(left, bottom, right, bottom, paint);
 
     //Draw axis Y
-    canvas.drawLine(left, getTop(), left, bottom, paint);
+    canvas.drawLine(left, top, left, bottom, paint);
 
     paint.setColor(gridLineColor);
+
+
+    Log.d("Graph", "HorizontalGridSpacing: " + horizontalGridSpacing);
     //Draw horizontal lines
-    while (bottom > 0) {
+    while (bottom > top) {
       canvas.drawLine(left, bottom, right, bottom, paint);
       bottom -= horizontalGridSpacing;
     }
 
     //Draw vertical lines
     bottom = getBottom() - offsetAxisX;
-    while (right < 0) {
+    Log.d("Graph", "left: " + left);
+    Log.d("Graph", "right: " + right);
+    while (right >= left) {
       canvas.drawLine(right, top, right, bottom, paint);
       right -= verticalGridSpacing;
     }
+    Log.d("Graph", "left: " + left);
 
     super.dispatchDraw(canvas);
   }
 
-  public float getHorizontalGridSpacing() {
+  @Override public void setAdapter(Adapter adapter) {
+    if (!(adapter instanceof BaseGraphBarAdapter)) {
+      throw new UnsupportedClassVersionError("You should set a BaseGraphBarAdapter!");
+    }
+    final BaseGraphBarAdapter baseAdapter = (BaseGraphBarAdapter) adapter;
+    post(new Runnable() {
+      @Override public void run() {
+        baseAdapter.setViewHeight(getHeight() - 2* offsetAxisX);
+        BarGraph.super.setAdapter(baseAdapter);
+      }
+    });
+  }
+
+  public int getHorizontalGridSpacing() {
     return horizontalGridSpacing;
   }
 
-  public void setHorizontalGridSpacing(float horizontalGridSpacing) {
+  public void setHorizontalGridSpacing(int horizontalGridSpacing) {
     this.horizontalGridSpacing = horizontalGridSpacing;
   }
 
-  public float getVerticalGridSpacing() {
+  public int getVerticalGridSpacing() {
     return verticalGridSpacing;
   }
 
-  public void setVerticalGridSpacing(float verticalGridSpacing) {
+  public void setVerticalGridSpacing(int verticalGridSpacing) {
     this.verticalGridSpacing = verticalGridSpacing;
   }
 
-  public float getOffsetAxisX() {
+  public int getOffsetAxisX() {
     return offsetAxisX;
   }
 
-  public void setOffsetAxisX(float offsetAxisX) {
+  public void setOffsetAxisX(int offsetAxisX) {
     this.offsetAxisX = offsetAxisX;
   }
 
-  public float getGridLineWidth() {
+  public int getGridLineWidth() {
     return gridLineWidth;
   }
 
-  public void setGridLineWidth(float gridLineWidth) {
+  public void setGridLineWidth(int gridLineWidth) {
     this.gridLineWidth = gridLineWidth;
   }
 
