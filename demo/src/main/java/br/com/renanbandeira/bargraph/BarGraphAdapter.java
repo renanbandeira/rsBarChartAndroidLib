@@ -25,10 +25,6 @@ public class BarGraphAdapter extends BaseGraphBarAdapter<BarGraphAdapter.ViewHol
     Collections.sort(this.values);
   }
 
-  private int calculateHeightForValue(double value) {
-    return  ((int)(viewHeight * value))/(int)getHighestValue();
-  }
-
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.graph_line, parent, false);
@@ -40,7 +36,7 @@ public class BarGraphAdapter extends BaseGraphBarAdapter<BarGraphAdapter.ViewHol
 
     holder.value.setText(brCurrencyFormat.format(value));
 
-    int valueHeight = calculateHeightForValue(value);
+    int valueHeight = getItemBarHeight(value);
 
     ValueAnimator va = ValueAnimator.ofInt(10, valueHeight);
     va.setDuration(1800);

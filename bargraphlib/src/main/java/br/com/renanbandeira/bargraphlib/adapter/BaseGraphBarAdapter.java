@@ -18,6 +18,17 @@ public abstract class BaseGraphBarAdapter<VH extends RecyclerView.ViewHolder> ex
   protected abstract double getHighestValue();
 
   /***
+   *
+   * @param barValue the item value
+   * @return the scaled bar height for the item
+   */
+  protected int getItemBarHeight(double barValue) {
+    return ((int)(viewHeight * barValue))/(int)getHighestValue();
+  }
+
+
+
+  /***
    * Sets the BarGraphView height
    * @param viewHeight
    */
