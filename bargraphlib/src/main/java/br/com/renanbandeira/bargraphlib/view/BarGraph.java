@@ -9,7 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
+
 import br.com.renanbandeira.bargraphlib.R;
 import br.com.renanbandeira.bargraphlib.adapter.BaseGraphBarAdapter;
 
@@ -61,7 +61,7 @@ public class BarGraph extends RecyclerView {
     try {
       horizontalGridSpacing = ta.getDimensionPixelSize(R.styleable.BarGraph_horizontalGridSpacing, 0);
       verticalGridSpacing = ta.getDimensionPixelSize(R.styleable.BarGraph_verticalGridSpacing, 0);
-      offsetAxisX = ta.getDimensionPixelSize(R.styleable.BarGraph_offsetAxisX, 0);
+      offsetAxisX = ta.getDimensionPixelSize(R.styleable.BarGraph_offsetBottomAxis, 0);
       gridLineWidth = ta.getDimensionPixelSize(R.styleable.BarGraph_gridLineWidth, 0);
       gridLineColor = ta.getColor(R.styleable.BarGraph_gridLineColor, Color.TRANSPARENT);
       axisLineColor = ta.getColor(R.styleable.BarGraph_axisLineColor, gridLineColor);
@@ -77,34 +77,36 @@ public class BarGraph extends RecyclerView {
     int right = getRight();
 
     Paint paint = new Paint();
+    if(gridLineWidth != 0) {
+      paint.setStrokeWidth(gridLineWidth);
+    }
 
-    //Draw axis X
-    paint.setColor(axisLineColor);
-    paint.setStrokeWidth(gridLineWidth);
-    canvas.drawLine(left, bottom, right, bottom, paint);
-
-    //Draw axis Y
-    canvas.drawLine(left, top, left, bottom, paint);
-
-    paint.setColor(gridLineColor);
-
-
-    Log.d("Graph", "HorizontalGridSpacing: " + horizontalGridSpacing);
-    //Draw horizontal lines
-    while (bottom > top) {
+    if(horizontalGridSpacing != 0) {
+      //Draw axis X
+      paint.setColor(axisLineColor);
       canvas.drawLine(left, bottom, right, bottom, paint);
-      bottom -= horizontalGridSpacing;
+
+      //Draw horizontal lines
+      while (bottom > top) {
+        canvas.drawLine(left, bottom, right, bottom, paint);
+        bottom -= horizontalGridSpacing;
+      }
     }
 
-    //Draw vertical lines
-    bottom = getBottom() - offsetAxisX;
-    Log.d("Graph", "left: " + left);
-    Log.d("Graph", "right: " + right);
-    while (right >= left) {
-      canvas.drawLine(right, top, right, bottom, paint);
-      right -= verticalGridSpacing;
+    if(verticalGridSpacing != 0) {
+      //Draw axis Y
+      canvas.drawLine(left, top, left, bottom, paint);
+      paint.setColor(axisLineColor);
+
+      //Draw vertical lines
+      bottom = getBottom() - offsetAxisX;
+      while (right >= left) {
+        canvas.drawLine(right, top, right, bottom, paint);
+        right -= verticalGridSpacing;
+      }
     }
-    Log.d("Graph", "left: " + left);
+
+
 
     super.dispatchDraw(canvas);
   }

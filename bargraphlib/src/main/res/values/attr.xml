@@ -4,7 +4,7 @@
     <attr name="horizontalGridSpacing" format="dimension"/>
     <attr name="verticalGridSpacing" format="dimension"/>
     <attr name="gridLineWidth" format="dimension"/>
-    <attr name="offsetAxisX" format="dimension" />
+    <attr name="offsetBottomAxis" format="dimension" />
     <attr name="gridLineColor" format="color" />
     <attr name="axisLineColor" format="color" />
   </declare-styleable>
