@@ -110,6 +110,10 @@ public class BarGraph extends RecyclerView {
   }
 
   @Override public void setAdapter(Adapter adapter) {
+    if (isInEditMode()) {
+      super.setAdapter(adapter);
+      return;
+    }
     if (!(adapter instanceof BaseGraphBarAdapter)) {
       throw new UnsupportedClassVersionError("You should set a BaseGraphBarAdapter!");
     }
