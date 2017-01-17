@@ -1,6 +1,17 @@
 # rsBarChartAndroidLib
 An android library to create custom bar charts
-**Under construction. It's not on gradle yet**
+
+## Demo
+
+![This is one example of how you can use it](example.png?raw=true "Demo")
+
+## Instalation
+
+```
+dependencies {
+    compile 'com.github.renanbandeira:br.com.renanbandeira.bargraphlib:0.0.1'
+}
+```
 
 ## Usage
 It's very simple to use it. First of all, you need to add the View to your XML:
