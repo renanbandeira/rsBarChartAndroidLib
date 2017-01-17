@@ -26,7 +26,7 @@ It's very simple to use it. First of all, you need to add the View to your XML:
       graph:gridLineColor="@color/colorPrimaryDark"
       graph:gridLineWidth="1dp"
       graph:horizontalGridSpacing="20dp"
-      graph:offsetAxisX="57dp"
+      graph:offsetBottomAxis="57dp"
       graph:verticalGridSpacing="20dp"
       />
 ```
